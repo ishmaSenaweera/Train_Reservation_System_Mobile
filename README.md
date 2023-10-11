@@ -1,6 +1,6 @@
 # eTrainSL Mobile App
 
-##This is a Train Reservation System developed using the client-server architecture. This system incorporates web and mobile applications that connect to a centralized web service running on IIS.
+## This is a Train Reservation System developed using the client-server architecture. This system incorporates web and mobile applications that connect to a centralized web service running on IIS.
 
 ### Technologies Used:
 Web Service: C# / WEB API <br />

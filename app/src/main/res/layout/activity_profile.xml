@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ProfileActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="#05386b">
+
+            <ImageView
+                android:id="@+id/profileimage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_baseline_account_circle_24" />
+
+            <TextView
+                android:id="@+id/profilewelcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profileimage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Welcome"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:background="#A5ABBD"
+            android:padding="15dp">
+
+
+            <TextView
+                android:id="@+id/profilename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_person_24"
+                android:drawablePadding="20dp"
+                android:text="Loading"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/profilename"
+                android:layout_marginTop="20dp"
+                android:background="#414656"
+                android:id="@+id/profiledivider1"/>
+
+            <TextView
+                android:id="@+id/profilenic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_contact_emergency_24"
+                android:drawablePadding="20dp"
+                android:text="Loading"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/profiledivider1"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/profilenic"
+                android:layout_marginTop="20dp"
+                android:background="#414656"
+                android:id="@+id/profiledivider2"/>
+
+            <TextView
+                android:id="@+id/profilephone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_phone_24"
+                android:drawablePadding="20dp"
+                android:text="Loading"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/profiledivider2"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/profilephone"
+                android:layout_marginTop="20dp"
+                android:background="#414656"
+                android:id="@+id/profiledivider3"/>
+
+            <TextView
+                android:id="@+id/profileemail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_email_24"
+                android:drawablePadding="20dp"
+                android:text="Loading"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/profiledivider3"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/profileemail"
+                android:layout_marginTop="20dp"
+                android:background="#414656"
+                android:id="@+id/profiledivider4"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1045740589223",
+    "project_id": "etrainsl",
+    "storage_bucket": "etrainsl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045740589223:android:7dac3a8e63521677eb0b82",
+        "android_client_info": {
+          "package_name": "com.example.mobile_client"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2sg4X-5cpRwTpoU_dG-C2TzgRhfjxY0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

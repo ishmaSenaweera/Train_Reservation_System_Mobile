@@ -10,6 +10,12 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
+/*
+ * File Name: TravelerAPI.java
+ * Description: Contains APIs to communicate with backend.
+ * Author: IT20123468
+ */
+
 public interface TravelerAPI {
 
     @POST("api/traveler")

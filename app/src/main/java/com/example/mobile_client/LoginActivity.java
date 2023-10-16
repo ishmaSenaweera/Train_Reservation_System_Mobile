@@ -5,6 +5,7 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
@@ -38,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText nicField, passwordField;
     private ImageView showHidePwd;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         showHidePwd = findViewById(R.id.showhidepassword);
         showHidePwd.setImageResource(R.drawable.ic_hide_pwd);  // Start with the password hidden
         passwordField.setTransformationMethod(PasswordTransformationMethod.getInstance()); // Ensure initial state
+        progressBar = findViewById(R.id.progressBar);
 
         showHidePwd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordField.getText().toString().trim();
 
         if (validateInput(nic, password)) {
+            progressBar.setVisibility(View.VISIBLE);
             Traveler traveler = new Traveler();
             traveler.setNic(nic);
             traveler.setPassword(password);
@@ -113,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         Traveler loggedInUser = response.body();
                         saveUserToPrefs(loggedInUser);
+                        progressBar.setVisibility(View.INVISIBLE);
 
                         // Check for null, just in case
                         if (loggedInUser != null) {
@@ -130,8 +135,10 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         try {
                             String errorMessage = response.errorBody().string();
+                            progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(LoginActivity.this, "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
                         } catch (IOException e) {
+                            progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -139,6 +146,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Traveler> call, Throwable t) {
+                    progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(LoginActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 

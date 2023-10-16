@@ -1,5 +1,11 @@
 package com.example.mobile_client.model;
 
+/*
+ * File Name: ChangePasswordRequest.java
+ * Description: Request Model to store Password Changes details.
+ * Author: IT20123468
+ */
+
 public class ChangePasswordRequest {
 
     private String currentPassword;

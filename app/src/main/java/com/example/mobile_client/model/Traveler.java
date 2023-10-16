@@ -2,6 +2,12 @@ package com.example.mobile_client.model;
 
 import java.io.Serializable;
 
+/*
+ * File Name: Traveler.java
+ * Description: Model to store Traveler details.
+ * Author: IT20123468
+ */
+
 public class Traveler implements Serializable {
 
     private String firstName;

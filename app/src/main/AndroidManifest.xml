@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mobile_Client">
         <activity
+            android:name=".EditReservation"
+            android:exported="true" />
+        <activity
+            android:name=".AddReservation"
+            android:exported="true" />
+        <activity
             android:name=".EditProfileActivity"
             android:exported="true">
             <meta-data
@@ -21,7 +27,7 @@
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ProfileActivity"
             android:exported="true">
@@ -31,10 +37,10 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

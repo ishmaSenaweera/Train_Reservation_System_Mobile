@@ -1,8 +1,8 @@
 package com.example.mobile_client;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,10 +15,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.example.mobile_client.api.TravelerAPI;
 import com.example.mobile_client.model.ChangePasswordRequest;
 import com.example.mobile_client.model.Traveler;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.io.IOException;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,6 +48,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private Traveler loggedInUser;
     private EditText editFirstName, editLastName, editNic, editPhone, editEmail;
+    private String originalNIC;
+    private boolean isNICChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +110,7 @@ public class EditProfileActivity extends AppCompatActivity {
             editNic.setText(loggedInUser.getNic());
             editPhone.setText(loggedInUser.getPhone());
             editEmail.setText(loggedInUser.getEmail());
+            originalNIC = loggedInUser.getNic();
         }
 
         // Set click listener for the update button
@@ -124,6 +132,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         // Validate the user input
         if (validateInput(firstName, lastName, nic, phone, email)) {
+            isNICChanged = !nic.equals(originalNIC);
             updateTraveler = new Traveler();
             updateTraveler.setFirstName(firstName);
             updateTraveler.setLastName(lastName);
@@ -140,13 +149,21 @@ public class EditProfileActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
-                        saveUserToPrefs(updateTraveler);
-                        Toast.makeText(EditProfileActivity.this, "Profile updated successfully!", Toast.LENGTH_SHORT).show();
-                        // Navigate to ProfileActivity with the updated data
-                        Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
-                        intent.putExtra("traveler_data", updateTraveler);
-                        startActivity(intent);
-                        finish(); // This will finish the EditProfileActivity and prevent going back to it on pressing the back button
+                        if (isNICChanged) {
+                            clearUserFromPrefs();
+                            Toast.makeText(EditProfileActivity.this, "NIC Changed! Please login again.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(EditProfileActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            saveUserToPrefs(updateTraveler);
+                            Toast.makeText(EditProfileActivity.this, "Profile updated successfully!", Toast.LENGTH_SHORT).show();
+                            // Navigate to ProfileActivity with the updated data
+                            Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
+                            intent.putExtra("traveler_data", updateTraveler);
+                            startActivity(intent);
+                            finish(); // This will finish the EditProfileActivity and prevent going back to it on pressing the back button
+                        }
                     } else {
                         try {
                             String errorMessage = response.errorBody().string();

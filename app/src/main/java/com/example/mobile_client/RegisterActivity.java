@@ -1,17 +1,22 @@
 package com.example.mobile_client;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
+
 import com.example.mobile_client.api.TravelerAPI;
 import com.example.mobile_client.model.Traveler;
+
 import java.io.IOException;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText regFirstName, regLastName, regNIC, regPhone, regEmail, regPassword, regRePassword;
     private TextView login;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
         regPassword = findViewById(R.id.regpassword);
         regRePassword = findViewById(R.id.regrepassword);
         login = findViewById(R.id.login);
+        progressBar = findViewById(R.id.progressBar);
 
         findViewById(R.id.registerbtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Validate the user input
         if (validateInput(firstName, lastName, nic, phone, email, password, rePassword)) {
+            progressBar.setVisibility(View.VISIBLE);
             Traveler traveler = new Traveler();
             traveler.setFirstName(firstName);
             traveler.setLastName(lastName);
@@ -109,6 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
+                        progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(RegisterActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
                         // navigate to login
                         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -116,8 +125,10 @@ public class RegisterActivity extends AppCompatActivity {
                     } else {
                         try {
                             String errorMessage = response.errorBody().string();
+                            progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(RegisterActivity.this, "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
                         } catch (IOException e) {
+                            progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
                         }
 
@@ -126,11 +137,11 @@ public class RegisterActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
+                    progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(RegisterActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
-
 
     }
 
